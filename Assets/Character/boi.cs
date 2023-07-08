@@ -129,6 +129,7 @@ public class boi : MonoBehaviour
     private void ThrowObject()
     {
         _handsJoint.enabled = false;
+        _heldObject.GetComponent<Collider2D>().enabled = true;
         _heldObject.GetComponent<Rigidbody2D>().velocity = Input.GetAxis("Vertical") < 0 ? Vector2.zero:
             new Vector2(_rigidbody.velocity.x * _throwStrength, 0) + 
             new Vector2 (_spriteRenderer.flipX ? -1 : 1, 2) * _lobStrength;
@@ -142,6 +143,7 @@ public class boi : MonoBehaviour
 
         _heldObject = closest.gameObject;
         _heldObject.transform.position = gameObject.transform.position;
+        _heldObject.GetComponent<Collider2D>().enabled = false;
         _handsJoint.connectedBody = closest;
         _handsJoint.enabled = true;
     }

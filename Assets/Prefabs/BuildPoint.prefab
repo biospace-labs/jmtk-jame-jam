@@ -529,7 +529,7 @@ MonoBehaviour:
   prefabToBuild: {fileID: 0}
   buildTime: 1
   buildIndicator: {fileID: 2940533912740598598}
-  availableResources: 
+  availableResources: []
 --- !u!1 &7340249256154149516
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5319767858347810281}
   - component: {fileID: 1515766821480054463}
-  - component: {fileID: 8919307648258317330}
   - component: {fileID: 254866918574368469}
   - component: {fileID: 7478085031755632335}
   - component: {fileID: 1541744540762846526}
@@ -88,41 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &8919307648258317330
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7886930361325529567}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0024542212, y: 0.5373548}
-  serializedVersion: 2
-  m_Radius: 0.5169028
 --- !u!61 &254866918574368469
 BoxCollider2D:
   m_ObjectHideFlags: 0
