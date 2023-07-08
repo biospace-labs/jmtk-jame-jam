@@ -213,7 +213,7 @@ MonoBehaviour:
   _coyoteTime: 0.1
   _dynamicFriction: 1.2
   _throwStrength: 1
-  _lobStrength: 15
+  _lobStrength: 5
   _heldObject: {fileID: 0}
 --- !u!50 &7323307578448354179
 Rigidbody2D:
