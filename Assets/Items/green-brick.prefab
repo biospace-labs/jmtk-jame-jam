@@ -28,11 +28,11 @@ Transform:
   m_GameObject: {fileID: 7886930361325529567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.361, y: 0.31, z: 0}
-  m_LocalScale: {x: 0.385, y: 0.385, z: 0.385}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.2293332, y: 3.2293332, z: 3.2293332}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1515766821480054463
 SpriteRenderer:
