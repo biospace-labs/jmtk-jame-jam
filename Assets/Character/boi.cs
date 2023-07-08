@@ -13,6 +13,7 @@ public class boi : MonoBehaviour
     public float _dynamicFriction = 1.2f; // horizontal velocity is divided by this amount each frame without movement input
     public float _throwStrength = 1; // scales velocity-based throw velocity
     public float _lobStrength = 10; // scales base throw velocity
+    public float _minimumHoldTime = 0.2f;
 
     public GameObject _heldObject;
 
@@ -25,6 +26,9 @@ public class boi : MonoBehaviour
     private List<Collider2D> _colliding = new List<Collider2D>();
     private TouchingGround _isGrounded = TouchingGround.No;
     private Useable _using;
+    private float _throwStart;
+    private float _throwEnd;
+    private bool _throwTimerStarted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -69,12 +73,30 @@ public class boi : MonoBehaviour
         if (Input.GetButtonDown("Grab"))
         {
             if (_heldObject) {
-                ThrowObject();
+                _throwTimerStarted = true;
+                _throwStart = Time.timeSinceLevelLoad;
             } else
             {
                 PickUpNearest();
             }
         }
+
+        if (Input.GetButtonUp("Grab"))
+        {
+            if (_throwTimerStarted) {
+                _throwEnd = Time.timeSinceLevelLoad;
+
+                if (_throwEnd - _throwStart < _minimumHoldTime)
+                {
+                    DropObject();
+                } else {
+                    ThrowObject();
+                }
+
+                _throwTimerStarted = false;
+            }
+        }
+
 
         if (Input.GetButtonDown("Use"))
         {
@@ -133,6 +155,13 @@ public class boi : MonoBehaviour
         _heldObject.GetComponent<Rigidbody2D>().velocity = Input.GetAxis("Vertical") < 0 ? Vector2.zero:
             new Vector2(_rigidbody.velocity.x * _throwStrength, 0) + 
             new Vector2 (_spriteRenderer.flipX ? -1 : 1, 2) * _lobStrength;
+        _heldObject = null;
+    }
+
+    private void DropObject()
+    {
+        _handsJoint.enabled = false;
+        _heldObject.GetComponent<Collider2D>().enabled = true;
         _heldObject = null;
     }
 
