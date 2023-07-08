@@ -578,13 +578,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7323307578448354179, guid: 9b37d0430fd4a84498a29c4e1de984ce, type: 3}
-      propertyPath: m_GravityScale
-      value: 10
+    - target: {fileID: 3441534740021060240, guid: 9b37d0430fd4a84498a29c4e1de984ce, type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7323307578448354179, guid: 9b37d0430fd4a84498a29c4e1de984ce, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
+    - target: {fileID: 3441534740021060240, guid: 9b37d0430fd4a84498a29c4e1de984ce, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3441534740021060240, guid: 9b37d0430fd4a84498a29c4e1de984ce, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7338289164025564024, guid: 9b37d0430fd4a84498a29c4e1de984ce, type: 3}
       propertyPath: m_RootOrder

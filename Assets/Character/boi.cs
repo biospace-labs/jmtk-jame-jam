@@ -33,14 +33,13 @@ public class boi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded != TouchingGround.No)
+        if (Input.GetAxis("Jump") > 0 && _isGrounded != TouchingGround.No)
         {
             _rigidbody.velocity = Vector2.up * _jumpForce;
             _isGrounded = TouchingGround.No;
         }
 
-        Vector2 inputVector = new Vector2((Input.GetKey(KeyCode.RightArrow) ? 1 : 0) - 
-            (Input.GetKey(KeyCode.LeftArrow) ? 1 : 0), 0);
+        Vector2 inputVector = new Vector2(System.Math.Sign(Input.GetAxis("Horizontal")), 0);
         _rigidbody.velocity = new Vector2(
             Mathf.Clamp(_rigidbody.velocity.x + _horizontalAccel * inputVector.x * Time.deltaTime, 
                 -_maxMoveSpeed, _maxMoveSpeed),
@@ -49,7 +48,7 @@ public class boi : MonoBehaviour
 
         _animator.enabled = Input.anyKey;
 
-        if (Input.anyKey && _rigidbody.velocity.x != 0)
+        if (Input.GetAxis("Horizontal") != 0 && _rigidbody.velocity.x != 0)
         {
             _spriteRenderer.flipX = _rigidbody.velocity.x < 0;
         }

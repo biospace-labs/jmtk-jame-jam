@@ -124,7 +124,7 @@ MonoBehaviour:
   _maxMoveSpeed: 10
   _horizontalAccel: 1000
   _coyoteTime: 0.1
-  _dynamic_friction: 3
+  _dynamic_friction: 1.03
 --- !u!50 &7323307578448354179
 Rigidbody2D:
   serializedVersion: 4
@@ -140,7 +140,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
