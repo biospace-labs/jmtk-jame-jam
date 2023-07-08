@@ -121,15 +121,15 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: hands
     originalName: 
-    pivot: {x: 0.5, y: -0.5714286}
+    pivot: {x: 0.5, y: -0.4666667}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 16
-      height: 7
+      width: 32
+      height: 15
     spriteID: 7d5af0e0d34c41048ba12cc72ce121f3
     spriteBone: []
     spriteOutline: []
@@ -152,13 +152,13 @@ ScriptedImporter:
       frameIndex: 0
       cellRect:
         x: 0
-        y: 4
-        width: 16
-        height: 7
+        y: 7
+        width: 32
+        height: 15
       spriteId: 7d5af0e0d34c41048ba12cc72ce121f3
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 16, y: 16}
+  canvasSize: {x: 32, y: 32}
