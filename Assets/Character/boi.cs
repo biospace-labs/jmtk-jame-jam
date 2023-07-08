@@ -39,9 +39,8 @@ public class boi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Vertical") && _isGrounded != TouchingGround.No)
+        if (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0 && _isGrounded != TouchingGround.No)
         {
-            Debug.Log("jump");
             _rigidbody.velocity = Vector2.up * _jumpForce;
             _isGrounded = TouchingGround.No;
         }

@@ -121,14 +121,14 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: CircularSaw_Frame_0
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5138889, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 37
+      width: 36
       height: 36
     spriteID: 97498473b8acf4c47bcb002356c93cbc
     spriteBone: []
@@ -141,14 +141,14 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: CircularSaw_Frame_1
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5138889, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 48
-      width: 37
+      width: 36
       height: 36
     spriteID: 7ac07be5b622f3d4cb53188650e02b33
     spriteBone: []
@@ -173,7 +173,7 @@ ScriptedImporter:
       cellRect:
         x: 0
         y: 0
-        width: 37
+        width: 36
         height: 36
       spriteId: 97498473b8acf4c47bcb002356c93cbc
     - name: CircularSaw_Frame_1
@@ -181,7 +181,7 @@ ScriptedImporter:
       cellRect:
         x: 0
         y: 0
-        width: 37
+        width: 36
         height: 36
       spriteId: 7ac07be5b622f3d4cb53188650e02b33
     linkedCells: []
