@@ -28,6 +28,7 @@ public class boi : MonoBehaviour
     private enum TouchingGround { No = 0, Yes, Coyote };
     private List<Collider2D> _colliding = new List<Collider2D>();
     private TouchingGround _isGrounded = TouchingGround.No;
+    private Useable _using;
 
     // Start is called before the first frame update
     void Start()
@@ -42,9 +43,9 @@ public class boi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump") && _isGrounded != TouchingGround.No)
+        if (Input.GetButtonDown("Vertical") && _isGrounded != TouchingGround.No)
         {
-            Debug.Log("junp");
+            Debug.Log("jump");
             _rigidbody.velocity = Vector2.up * _jumpForce;
             _isGrounded = TouchingGround.No;
         }
@@ -70,38 +71,32 @@ public class boi : MonoBehaviour
 
         _handsRenderer.enabled = _heldObject != null;
 
-        System.Action ThrowObject = () =>
-        {
-            _handsJoint.enabled = false;
-            _heldObject.GetComponent<Rigidbody2D>().velocity = Input.GetAxis("Vertical") < 0 ? Vector2.zero:
-                new Vector2(_rigidbody.velocity.x * _throwStrength, 0) + 
-                new Vector2 (_spriteRenderer.flipX ? -1 : 1, 2) * _lobStrength;
-            _heldObject = null;
-        };
-
-        System.Action PickUpNearest = () =>
-        {
-            List<Collider2D> colliders = new List<Collider2D>();
-            _rigidbody.OverlapCollider(new ContactFilter2D(), colliders);
-            colliders = (from collider in colliders where collider.gameObject.layer == LayerMask.NameToLayer("Item") select collider).ToList<Collider2D>();
-            if (colliders.Count == 0) return;
-            _heldObject = colliders.Aggregate((curMin, x) =>
-                (curMin == null || Vector3.Distance(x.transform.position, gameObject.transform.position) <
-                Vector3.Distance(curMin.transform.position, gameObject.transform.position) ? x : curMin)).gameObject;
-            _heldObject.transform.position = gameObject.transform.position;
-            _handsJoint.connectedBody = _heldObject.GetComponent<Rigidbody2D>();
-            _handsJoint.enabled = true;
-        };
-
         if (Input.GetButtonDown("Grab"))
         {
-            if (_heldObject != null) {
+            if (_heldObject) {
                 ThrowObject();
             } else
             {
                 PickUpNearest();
             }
         }
+
+        if (Input.GetButtonDown("Use"))
+        {
+            Useable closest = getClosestOverlapping<Useable>();
+            if (closest != null)
+            {
+                _using = closest;
+                _using.BeginUse();
+            }
+        }
+
+        if (_using != null && Input.GetButtonUp("Use"))
+        {
+            _using.EndUse();
+            _using = null;
+        }
+        
         // Debug coyote time
         //_spriteRenderer.color = _isGrounded == TouchingGround.Yes ? Color.white :
         //  (_isGrounded == TouchingGround.Coyote ? Color.blue : Color.red);
@@ -134,5 +129,52 @@ public class boi : MonoBehaviour
         {
             _isGrounded = TouchingGround.No;
         }
+    }
+
+    private void ThrowObject()
+    {
+        _handsJoint.enabled = false;
+        _heldObject.GetComponent<Rigidbody2D>().velocity = Input.GetAxis("Vertical") < 0 ? Vector2.zero:
+            new Vector2(_rigidbody.velocity.x * _throwStrength, 0) + 
+            new Vector2 (_spriteRenderer.flipX ? -1 : 1, 2) * _lobStrength;
+        _heldObject = null;
+    }
+
+    private void PickUpNearest()
+    {
+        Rigidbody2D closest = getClosestOverlapping<Rigidbody2D>("Item");
+        if (!closest) return;
+
+        _heldObject = closest.gameObject;
+        _heldObject.transform.position = gameObject.transform.position;
+        _handsJoint.connectedBody = closest;
+        _handsJoint.enabled = true;
+    }
+
+    private T getClosestOverlapping<T>(string layerName = null)
+        where T : class
+    {
+        List<Collider2D> colliders = new List<Collider2D>();
+        var filter = new ContactFilter2D();
+        filter.useTriggers = true;
+        if (layerName != null) filter.SetLayerMask(LayerMask.GetMask(layerName));
+        _rigidbody.OverlapCollider(filter, colliders);
+        if (colliders.Count == 0) return null;
+        
+        T closest = null;
+        float min = Single.PositiveInfinity;
+        foreach (var collider in colliders)
+        {
+            T component = collider.gameObject.GetComponent<T>();
+            if (component == null) continue;
+
+            float sqrDist = Vector3.SqrMagnitude(collider.transform.position - transform.position);
+            if (sqrDist < min)
+            {
+                closest = component;
+                min = sqrDist;
+            }
+        }
+        return closest;
     }
 }
