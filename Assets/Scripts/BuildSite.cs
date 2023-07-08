@@ -3,23 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-public class BuildPoint : Useable
+public class BuildSite : Useable
 {
-    public GameObject prefabToBuild;
-    public float buildTime = 1f;
+    public BuildableBlueprint objToBuild;
 
     public Image buildIndicator;
 
     public List<ResourceItem> availableResources;
-    private BuildableBlueprint _blueprint;
     private List<ResourceItem> _resourcesToUse = new();
 
     public void Start()
     {
-        _blueprint = prefabToBuild.GetComponent<BuildableBlueprint>();
         availableResources = new List<ResourceItem>();
 
         buildIndicator.fillAmount = 0;
@@ -48,7 +46,7 @@ public class BuildPoint : Useable
     public override void BeginUse()
     {
         // check if we have enough resources
-        var required = new List<ResourceType>(_blueprint.requiredResources);
+        var required = new List<ResourceType>(objToBuild.requiredResources);
         _resourcesToUse.Clear();
         foreach (var item in availableResources)
         {
@@ -71,10 +69,10 @@ public class BuildPoint : Useable
     private IEnumerator HoldToBuild()
     {
         float elapsedTime = 0f;
-        while (elapsedTime < buildTime)
+        while (elapsedTime < objToBuild.buildTime)
         {
             elapsedTime += Time.deltaTime;
-            buildIndicator.fillAmount = elapsedTime / buildTime;
+            buildIndicator.fillAmount = elapsedTime / objToBuild.buildTime;
 
             yield return null;
         }
@@ -83,10 +81,8 @@ public class BuildPoint : Useable
         {
             Destroy(item.gameObject);
         }
-
-        Instantiate(prefabToBuild, transform.position, transform.rotation);
-
-        //TODO animate building
+        
+        objToBuild.Build();
 
         Destroy(gameObject, 0.3f);
     }
