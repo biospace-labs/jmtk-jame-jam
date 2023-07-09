@@ -35,18 +35,16 @@ public class BuildableBlueprint : MonoBehaviour
     public bool startBuilt = false;
     public BuildableBlueprint[] prerequisites;
 
-    void Start()
-    {
-        _tiles = gameObject.transform.GetChild(0).gameObject;
-        _buildParticles = GetComponentInChildren<ParticleSystem>();
-        _animationFinalPosition = _tiles.transform.position;
-        _animationInitialPosition = _tiles.transform.position - gameObject.transform.up * _spriteHeight;
-    }
-
     public void Build()
     {
-        _tiles.transform.position = _animationInitialPosition;
         gameObject.SetActive(true);
+
+        _tiles = gameObject.transform.GetChild(0).gameObject;
+        _buildParticles = GetComponentInChildren<ParticleSystem>(true);
+        _animationFinalPosition = _tiles.transform.position;
+        _animationInitialPosition = _tiles.transform.position - gameObject.transform.up * _spriteHeight;
+
+        _tiles.transform.position = _animationInitialPosition;
 
         _buildParticles.Play();
 
