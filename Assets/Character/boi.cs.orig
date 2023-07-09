@@ -34,9 +34,15 @@ public class boi : MonoBehaviour
     private TouchingGround _isGrounded = TouchingGround.No;
     private KnockedDown _isProne = KnockedDown.No;
     private Useable _using;
+<<<<<<< HEAD
     private bool _throwing;
     private float _throwHeldTime;
+=======
+    private float _throwStart;
+    private float _throwEnd;
+    private bool _throwTimerStarted = false;
     private float _lowerBound;
+>>>>>>> 3a8cf04 (respawning after falling for boi)
 
     // Start is called before the first frame update
     void Start()
@@ -65,13 +71,15 @@ public class boi : MonoBehaviour
         if (_colliding.Count != 0)
             _isGrounded = TouchingGround.Yes;
 
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            GetHit(new Vector2(3, 25));
+        }
+
         if (transform.position.y < _lowerBound - 10)
         {
             transform.position = respawnLocation;
             _rigidbody.velocity = Vector2.zero;
-            StopAllCoroutines();
-            _spriteRenderer.color = Color.white;
-            _isProne = KnockedDown.No;
             GetHit(Vector2.zero, 2);
         }
     }
