@@ -21,7 +21,7 @@ public class boi : MonoBehaviour
     public GameObject _heldObject;
 
     private Rigidbody2D _rigidbody;
-    private BoxCollider2D _foot;
+    private CapsuleCollider2D _foot;
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _handsRenderer;
     private FixedJoint2D _handsJoint;
@@ -44,7 +44,7 @@ public class boi : MonoBehaviour
         _handsRenderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
         _handsJoint = gameObject.GetComponent<FixedJoint2D>();
         _animator = gameObject.GetComponent<Animator>();
-        _foot = gameObject.GetComponent<BoxCollider2D>(); // Make sure the foot is the first box collider!!
+        _foot = gameObject.GetComponent<CapsuleCollider2D>(); // Make sure the foot is the first box collider!!
     }
 
     // Update is called once per frame
@@ -77,6 +77,7 @@ public class boi : MonoBehaviour
         }
 
         Vector2 inputVector = new Vector2(System.Math.Sign(Input.GetAxis("Horizontal")), System.Math.Sign(Input.GetAxis("Vertical")));
+        Debug.Log(inputVector);
         _rigidbody.velocity = new Vector2(
             Mathf.MoveTowards(_rigidbody.velocity.x, inputVector.x * _maxMoveSpeed, _horizontalAccel),
             _rigidbody.velocity.y
