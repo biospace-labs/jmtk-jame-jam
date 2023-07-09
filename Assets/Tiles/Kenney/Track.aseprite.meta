@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b90854ab74f9ce84b866eda89090d1e2
+guid: da9a8efe8d86a9e469133ee3276d2154
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -32,7 +32,7 @@ ScriptedImporter:
     sRGBTexture: 1
     spriteMode: 2
     spriteExtrude: 1
-    spriteMeshType: 1
+    spriteMeshType: 0
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
     spritePixelsToUnits: 18
@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638244930804654816
+  platformSettingsDirtyTick: 638244940917797679
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -119,18 +119,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: CircularSaw_Frame_0
+  - name: Track
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 2, y: 4, z: 2, w: 4}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 36
-      height: 36
-    spriteID: 97498473b8acf4c47bcb002356c93cbc
+      width: 6
+      height: 30
+    spriteID: 7244885f292868f41baf62082209bf65
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,51 +139,23 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: CircularSaw_Frame_1
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 48
-      width: 36
-      height: 36
-    spriteID: 7ac07be5b622f3d4cb53188650e02b33
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 48}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1508738300
-    name: CircularSaw
+    guid: 173987123
+    name: Track
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: CircularSaw_Frame_0
+    - name: Track
       frameIndex: 0
       cellRect:
         x: 0
-        y: 0
-        width: 36
-        height: 36
-      spriteId: 97498473b8acf4c47bcb002356c93cbc
-    - name: CircularSaw_Frame_1
-      frameIndex: 1
-      cellRect:
-        x: 0
-        y: 0
-        width: 36
-        height: 36
-      spriteId: 7ac07be5b622f3d4cb53188650e02b33
+        y: 10
+        width: 6
+        height: 30
+      spriteId: 7244885f292868f41baf62082209bf65
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -237,4 +209,4 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 36, y: 36}
+  canvasSize: {x: 6, y: 50}
