@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
 
@@ -17,6 +16,9 @@ public class boi : MonoBehaviour
     public float _lobStrength = 10; // scales base throw velocity
     public float _immuneTime = 2;
     public float _minimumHoldTime = 0.2f;
+    public Vector2 respawnLocation = Vector2.zero;
+
+    public bool _inputsEnabled = true;
 
     public GameObject _heldObject;
 
@@ -34,6 +36,7 @@ public class boi : MonoBehaviour
     private Useable _using;
     private bool _throwing;
     private float _throwHeldTime;
+    private float _lowerBound;
 
     // Start is called before the first frame update
     void Start()
@@ -44,12 +47,13 @@ public class boi : MonoBehaviour
         _handsJoint = gameObject.GetComponent<FixedJoint2D>();
         _animator = gameObject.GetComponent<Animator>();
         _foot = gameObject.GetComponent<CapsuleCollider2D>(); // Make sure the foot is the first box collider!!
+        _lowerBound = (from GameObject obj in GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None) where obj.layer == LayerMask.NameToLayer("Ground") select obj.transform.position.y).Min();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_isProne != KnockedDown.Yes)
+        if (_isProne != KnockedDown.Yes && _inputsEnabled);
         {
             handleInput();
         }
@@ -61,9 +65,14 @@ public class boi : MonoBehaviour
         if (_colliding.Count != 0)
             _isGrounded = TouchingGround.Yes;
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (transform.position.y < _lowerBound - 10)
         {
-            GetHit(new Vector2(3, 25));
+            transform.position = respawnLocation;
+            _rigidbody.velocity = Vector2.zero;
+            StopAllCoroutines();
+            _spriteRenderer.color = Color.white;
+            _isProne = KnockedDown.No;
+            GetHit(Vector2.zero, 2);
         }
     }
 
