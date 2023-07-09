@@ -267,8 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604e938fb3c1d154583d8d3aa6d2fbfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material1Image: {fileID: 2217768669152955558}
-  material2Image: {fileID: 4700204058314869269}
+  material1LayoutGroup: {fileID: 8955969109720503471}
+  material2LayoutGroup: {fileID: 865916404530380094}
 --- !u!1 &4700204058314869269
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,14 +13,30 @@ public class BuildSite : Useable
 
     public Image buildIndicator;
     public ResourceBubble bubble;
+    public GameObject canBuildIndicator;
 
     private List<ResourceItem> availableResources;
 
     public void Start()
     {
         availableResources = new List<ResourceItem>();
+        UpdateIndicators();
 
         buildIndicator.fillAmount = 0;
+    }
+
+    public void Update()
+    {
+        if (!objToBuild)
+        {
+            Debug.LogWarning("BuildSite: objToBuild is null, destroying self!");
+            Destroy(gameObject);
+        }
+        else if (objToBuild.gameObject.activeInHierarchy)
+        {
+            Debug.LogWarning("BuildSite: objToBuild already active, destroying self!");
+            Destroy(gameObject);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -30,7 +46,7 @@ public class BuildSite : Useable
         if (item)
         {
             availableResources.Add(item);
-            UpdateBubble();
+            UpdateIndicators();
         }
     }
 
@@ -41,10 +57,10 @@ public class BuildSite : Useable
         if (item)
         {
             availableResources.Remove(item);
-            UpdateBubble();
+            UpdateIndicators();
         }
     }
-    private void UpdateBubble()
+    private void UpdateIndicators()
     {
         var missing = new List<ResourceType>(objToBuild.requiredResources);
 
@@ -54,6 +70,7 @@ public class BuildSite : Useable
         }
 
         bubble.OnResourcesChanged(missing);
+        canBuildIndicator.SetActive(missing.Count == 0);
     }
 
     public override void BeginUse()
