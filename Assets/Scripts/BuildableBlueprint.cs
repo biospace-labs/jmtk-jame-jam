@@ -24,6 +24,7 @@ public class BuildableBlueprint : MonoBehaviour
     public float _animationTime = 1f;
     public float trembleIntensity = 0.1f;
     public float _spriteHeight = 1;
+    public AudioSource _audioSource;
 
     [SerializeField]
     private BlueprintStaticProperties blueprintStaticProperties;
@@ -56,6 +57,7 @@ public class BuildableBlueprint : MonoBehaviour
         _tiles.transform.position = _animationInitialPosition;
 
         _buildParticles.Play();
+        _audioSource.Play();
 
         StartCoroutine(constructBuilding());
         //TODO animate building
