@@ -39,7 +39,6 @@ public class BuildableBlueprint : MonoBehaviour
         spriteHeight = tiles.GetComponentInChildren<Renderer>().bounds.size.y;
 
         yPosInitial = tiles.transform.position.y;
-        Debug.Log(yPosInitial);
 
         tiles.transform.position = new Vector2(tiles.transform.position.x,
             yPosInitial - spriteHeight);
@@ -58,7 +57,6 @@ public class BuildableBlueprint : MonoBehaviour
         while (tiles.transform.position.y < yPosInitial)
         {
             tiles.transform.position += Vector3.up * moveSpeed * Time.deltaTime;
-            Debug.Log(tiles.transform.position.y);
             yield return null;
         }
 
