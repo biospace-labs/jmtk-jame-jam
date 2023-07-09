@@ -14,8 +14,9 @@ public class Projectile : MonoBehaviour
     void Start()
     {   
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
-        Vector2 forceDirection = new Vector2(Mathf.Cos(gameObject.transform.eulerAngles.z * Mathf.Deg2Rad),
-            Mathf.Sin(gameObject.transform.eulerAngles.z * Mathf.Deg2Rad));
+        Vector2 forceDirection = gameObject.transform.up;
+            //new Vector2(Mathf.Cos(gameObject.transform.eulerAngles.z * Mathf.Deg2Rad),
+            //Mathf.Sin(gameObject.transform.eulerAngles.z * Mathf.Deg2Rad));
         _rigidbody.AddForce(forceDirection * force, ForceMode2D.Impulse);
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }

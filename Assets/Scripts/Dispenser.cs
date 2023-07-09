@@ -38,7 +38,7 @@ public class Dispenser : Useable
 
     public void DispenseItem()
     {
-        Instantiate(toDispense, gameObject.transform.position, Quaternion.identity);
+        Instantiate(toDispense, gameObject.transform.position + Vector3.up, Quaternion.identity);
     }
 
     private IEnumerator HoldToDispense()

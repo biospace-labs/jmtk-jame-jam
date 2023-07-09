@@ -27,6 +27,6 @@ public class Shooter : MonoBehaviour
 
     public void ShootProjectile()
     {
-        Instantiate(toShoot, gameObject.transform.position, gameObject.transform.rotation);
+        Instantiate(toShoot, gameObject.transform.position + gameObject.transform.up * 0.5f, gameObject.transform.rotation);
     }
 }

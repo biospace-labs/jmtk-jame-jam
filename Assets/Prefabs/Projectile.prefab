@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifespan: 5
-  force: 5
+  force: 8
   time: 0
   blastRadius: 2
 --- !u!212 &4321850958461689743

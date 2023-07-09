@@ -77,7 +77,6 @@ public class boi : MonoBehaviour
         }
 
         Vector2 inputVector = new Vector2(System.Math.Sign(Input.GetAxis("Horizontal")), System.Math.Sign(Input.GetAxis("Vertical")));
-        Debug.Log(inputVector);
         _rigidbody.velocity = new Vector2(
             Mathf.MoveTowards(_rigidbody.velocity.x, inputVector.x * _maxMoveSpeed, _horizontalAccel),
             _rigidbody.velocity.y
