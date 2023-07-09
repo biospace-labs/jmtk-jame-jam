@@ -39,8 +39,10 @@ public class LevelBlueprintManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minTimeBetweenBuildSpawns, maxTimeBetweenBuildSpawns));
+
+            activeBuildSites.RemoveAll(buildSite => buildSite == null);
             
-            if (activeBuildSites.Count > maxActiveBuildSites)
+            if (activeBuildSites.Count >= maxActiveBuildSites)
                 continue;
 
             var validBuildables = buildables.FindAll(buildable =>
