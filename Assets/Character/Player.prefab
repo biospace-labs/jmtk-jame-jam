@@ -15003,6 +15003,8 @@ MonoBehaviour:
   _lobStrength: 12
   _immuneTime: 2
   _minimumHoldTime: 0.2
+  respawnLocation: {x: 0, y: 0}
+  _inputsEnabled: 1
   _heldObject: {fileID: 0}
 --- !u!50 &7323307578448354179
 Rigidbody2D:

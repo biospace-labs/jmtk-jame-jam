@@ -18,6 +18,8 @@ public class boi : MonoBehaviour
     public float _minimumHoldTime = 0.2f;
     public Vector2 respawnLocation = Vector2.zero;
 
+    public bool _inputsEnabled = true;
+
     public GameObject _heldObject;
 
     private Rigidbody2D _rigidbody;
@@ -51,7 +53,7 @@ public class boi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isProne != KnockedDown.Yes)
+        if (_isProne != KnockedDown.Yes && _inputsEnabled);
         {
             handleInput();
         }
