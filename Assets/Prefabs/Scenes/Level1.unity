@@ -155,6 +155,7 @@ MonoBehaviour:
   minTimeBetweenBuildSpawns: 2
   maxTimeBetweenBuildSpawns: 7
   maxActiveBuildSites: 4
+  nextSceneName: Level2
   buildSitePrefab: {fileID: 6452244594432848034, guid: ee01463ec5d6478469593493177b3c8e, type: 3}
 --- !u!4 &11557435
 Transform:
