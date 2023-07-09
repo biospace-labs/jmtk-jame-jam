@@ -99,9 +99,9 @@ public class boi : MonoBehaviour
 
                 if (_throwEnd - _throwStart < _minimumHoldTime)
                 {
-                    DropObject();
-                } else {
                     ThrowObject();
+                } else {
+                    DropObject();
                 }
 
                 _throwTimerStarted = false;
