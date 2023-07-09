@@ -16,6 +16,7 @@ public class Dispenser : Useable
     {
 
         itemDisplay.sprite = toDispense.GetComponent<SpriteRenderer>().sprite;
+        indicator.fillAmount = 0f;
     }
 
     // Update is called once per frame
