@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum ResourceType
 {
-    Brick,
-    Metal,
+    Material1,
+    Material2,
 }
 
 public class ResourceItem : MonoBehaviour

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7195023186006939870}
-  - component: {fileID: 8336065868657659573}
   - component: {fileID: 7829685568705905811}
   m_Layer: 0
   m_Name: TestingLevel
@@ -38,24 +37,8 @@ Transform:
   - {fileID: 7335283889774130042}
   - {fileID: 7743115614257565108}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8336065868657659573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6881133388250855762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b665ec763f08e047b100ebcdcc142ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minTimeBetweenBuildSpawns: 1
-  maxTimeBetweenBuildSpawns: 5
-  maxActiveBuildSites: 3
-  buildSitePrefab: {fileID: 0}
 --- !u!114 &7829685568705905811
 MonoBehaviour:
   m_ObjectHideFlags: 0

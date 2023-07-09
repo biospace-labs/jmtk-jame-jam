@@ -12,9 +12,9 @@ public class BuildSite : Useable
     public BuildableBlueprint objToBuild;
 
     public Image buildIndicator;
+    public ResourceBubble bubble;
 
-    public List<ResourceItem> availableResources;
-    private List<ResourceItem> _resourcesToUse = new();
+    private List<ResourceItem> availableResources;
 
     public void Start()
     {
@@ -30,6 +30,7 @@ public class BuildSite : Useable
         if (item)
         {
             availableResources.Add(item);
+            UpdateBubble();
         }
     }
 
@@ -40,23 +41,23 @@ public class BuildSite : Useable
         if (item)
         {
             availableResources.Remove(item);
+            UpdateBubble();
         }
+    }
+    private void UpdateBubble()
+    {
+        var missing = new List<ResourceType>(objToBuild.requiredResources);
+
+        foreach (var item in availableResources)
+        {
+            missing.Remove(item.resourceType);
+        }
+
+        bubble.OnResourcesChanged(missing);
     }
 
     public override void BeginUse()
     {
-        // check if we have enough resources
-        var required = new List<ResourceType>(objToBuild.requiredResources);
-        _resourcesToUse.Clear();
-        foreach (var item in availableResources)
-        {
-            if (required.Remove(item.resourceType))
-            {
-                _resourcesToUse.Add(item);
-            }
-        }
-        if (required.Count > 0) return;
-        
         StartCoroutine("HoldToBuild");
     }
 
@@ -68,16 +69,32 @@ public class BuildSite : Useable
 
     private IEnumerator HoldToBuild()
     {
+        // check if we have enough resources
+        var missing = new List<ResourceType>(objToBuild.requiredResources);
+        var resourcesToUse = new List<ResourceItem>();
+
+        foreach (var item in availableResources)
+        {
+            if (missing.Remove(item.resourceType))
+            {
+                resourcesToUse.Add(item);
+            }
+        }
+
+        if (missing.Count > 0) yield break;
+        
         float elapsedTime = 0f;
         while (elapsedTime < objToBuild.buildTime)
         {
             elapsedTime += Time.deltaTime;
             buildIndicator.fillAmount = elapsedTime / objToBuild.buildTime;
+            
+            // check resources still in range??
 
             yield return null;
         }
 
-        foreach (var item in _resourcesToUse)
+        foreach (var item in resourcesToUse)
         {
             Destroy(item.gameObject);
         }
