@@ -16,7 +16,10 @@ public class TextboxManager : MonoBehaviour
     public int endAtLine;
     public boi boi;
 
-    public float randomTime = 60;
+    public float randomMinTime = 20;
+    public float randomMaxTime = 60;
+
+    private float randomTime;
     private float time = 0;
 
     private bool isActive = false;
@@ -25,7 +28,7 @@ public class TextboxManager : MonoBehaviour
     void Start()
     {
         boi = FindObjectOfType<boi>();
-
+        randomTime = Random.Range(randomMinTime,randomMaxTime);
         if (introText != null) {
             textLines = (introText.text.Split('\n'));
         }
@@ -49,8 +52,9 @@ public class TextboxManager : MonoBehaviour
             }
         } else {
             time += Time.deltaTime;
-            if (Random.Range(0.0f, (randomTime - time) * 60) < 1.0f) {
-                time = 0;
+            if (time >= randomTime) {
+                time -= randomTime;
+                randomTime = Random.Range(randomMinTime, randomMaxTime);
                 if (randomText != null) {
                     textLines = (randomText.text.Split('\n'));
                 }
