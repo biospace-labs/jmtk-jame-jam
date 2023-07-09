@@ -2501,6 +2501,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5270396141269675928, guid: 4414540d609e77f43b12f4a743743765, type: 3}
+      propertyPath: toDispense
+      value: 
+      objectReference: {fileID: 7886930361325529567, guid: 0f3820338ea8d2f45b66e6d801e394b8, type: 3}
     - target: {fileID: 6797614558111320540, guid: 4414540d609e77f43b12f4a743743765, type: 3}
       propertyPath: m_Name
       value: Dispenser (1)
@@ -3423,7 +3427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5704878930224470252, guid: 928289782d2672a47bde85d6ac6acb7d, type: 3}
       propertyPath: orthographic size
-      value: 5.9305553
+      value: 10.694445
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
