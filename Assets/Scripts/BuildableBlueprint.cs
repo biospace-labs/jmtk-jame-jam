@@ -2,13 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class BuildableBlueprint : MonoBehaviour
 {
-    public ResourceType[] requiredResources;
-    public float buildTime = 1f;
+    
+    [Serializable]
+    private class BlueprintStaticProperties
+    {
+        public float buildTime = 1f;
+        public ResourceType[] requiredResources;
+        public UnityEvent onBuildComplete;
+    }
 
-    [Header("Per Instance Options")]
+    [SerializeField]
+    private BlueprintStaticProperties blueprintStaticProperties;
+
+    public float buildTime => blueprintStaticProperties.buildTime;
+    public ResourceType[] requiredResources => blueprintStaticProperties.requiredResources;
+    public UnityEvent onBuildComplete => blueprintStaticProperties.onBuildComplete;
+
+    [Header("Per Instance Properties")]
     public bool startBuilt = false;
     public BuildableBlueprint[] prerequisites;
 
@@ -17,5 +32,7 @@ public class BuildableBlueprint : MonoBehaviour
         gameObject.SetActive(true);
 
         //TODO animate building
+
+        onBuildComplete.Invoke();
     }
 }
