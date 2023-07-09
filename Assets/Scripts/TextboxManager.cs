@@ -15,7 +15,7 @@ public class TextboxManager : MonoBehaviour
     public int endAtLine;
     public boi boi;
 
-    private bool isActive = true;
+    private bool isActive = false;
     
     // Start is called before the first frame update
     void Start()
@@ -29,6 +29,7 @@ public class TextboxManager : MonoBehaviour
         if (endAtLine == 0) {
             endAtLine = textLines.Length - 1;
         }
+        EnableTextBox();
     }
 
     // Update is called once per frame

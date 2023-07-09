@@ -53,12 +53,12 @@ public class boi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isProne != KnockedDown.Yes && _inputsEnabled);
+        if (_isProne != KnockedDown.Yes && _inputsEnabled)
         {
             handleInput();
         }
 
-        _animator.enabled = Input.GetButton("Horizontal") && _isProne != KnockedDown.Yes;
+        _animator.enabled = Input.GetButton("Horizontal") && _isProne != KnockedDown.Yes && _inputsEnabled;
 
         _handsRenderer.enabled = _heldObject != null;
 
