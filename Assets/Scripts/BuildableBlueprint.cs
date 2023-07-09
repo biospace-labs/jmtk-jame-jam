@@ -16,13 +16,13 @@ public class BuildableBlueprint : MonoBehaviour
         public UnityEvent onBuildComplete;
     }
     
-    private float spriteHeight;
-    private GameObject tiles;
+    private GameObject _tiles;
     private ParticleSystem _buildParticles;
-    private float xPosInitial;
-    private float yPosInitial;
-    public float moveSpeed;
-    public float trembleIntensity;
+    private Vector2 _animationInitialPosition;
+    private Vector2 _animationFinalPosition;
+    public float _animationTime = 1f;
+    public float trembleIntensity = 0.1f;
+    public float _spriteHeight = 1;
 
     [SerializeField]
     private BlueprintStaticProperties blueprintStaticProperties;
@@ -35,19 +35,19 @@ public class BuildableBlueprint : MonoBehaviour
     public bool startBuilt = false;
     public BuildableBlueprint[] prerequisites;
 
+    void Start()
+    {
+        _tiles = gameObject.transform.GetChild(0).gameObject;
+        _buildParticles = GetComponentInChildren<ParticleSystem>();
+        _animationFinalPosition = _tiles.transform.position;
+        _animationInitialPosition = _tiles.transform.position - gameObject.transform.up * _spriteHeight;
+    }
+
     public void Build()
     {
-        tiles = gameObject.transform.GetChild(0).gameObject;
-        spriteHeight = tiles.GetComponentInChildren<Renderer>().bounds.size.y;
-        xPosInitial = tiles.transform.position.x;
-        yPosInitial = tiles.transform.position.y;
-
-        tiles.transform.position = new Vector2(tiles.transform.position.x,
-            yPosInitial - spriteHeight);
-
+        _tiles.transform.position = _animationInitialPosition;
         gameObject.SetActive(true);
 
-        _buildParticles = GetComponentInChildren<ParticleSystem>();
         _buildParticles.Play();
 
         StartCoroutine(constructBuilding());
@@ -56,14 +56,14 @@ public class BuildableBlueprint : MonoBehaviour
 
     IEnumerator constructBuilding()
     {
-        while (tiles.transform.position.y < yPosInitial)
+        float timeElapsed = 0f;
+        while (timeElapsed < _animationTime)
         {
-            tiles.transform.position += Vector3.up * moveSpeed * Time.deltaTime;
-            tiles.transform.position += UnityEngine.Random.insideUnitSphere * trembleIntensity * Time.deltaTime;
+            timeElapsed += Time.deltaTime;
+            _tiles.transform.position = Vector3.Lerp(_animationInitialPosition, _animationFinalPosition, timeElapsed / _animationTime);
+            _tiles.transform.position += UnityEngine.Random.insideUnitSphere * trembleIntensity;
             yield return null;
         }
-
-        tiles.transform.position = new Vector2(xPosInitial, yPosInitial);
         onBuildComplete.Invoke();
     }
 }

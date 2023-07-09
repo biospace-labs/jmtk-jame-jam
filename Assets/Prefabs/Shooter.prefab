@@ -93,8 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19eeff4a6a1cbcd43bb408bbe6e96644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.8
-  trembleIntensity: 0
+  _animationTime: 1
+  trembleIntensity: 0.1
+  _spriteHeight: 1
   blueprintStaticProperties:
     buildTime: 1
     requiredResources: 00000000
