@@ -165,6 +165,7 @@ MonoBehaviour:
   minTimeBetweenBuildSpawns: 2
   maxTimeBetweenBuildSpawns: 7
   maxActiveBuildSites: 4
+  nextSceneName: Level3
   buildSitePrefab: {fileID: 6452244594432848034, guid: ee01463ec5d6478469593493177b3c8e, type: 3}
 --- !u!4 &11557435
 Transform:
@@ -4919,7 +4920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5704878930224470252, guid: 928289782d2672a47bde85d6ac6acb7d, type: 3}
       propertyPath: orthographic size
-      value: 5.3472223
+      value: 10.694445
       objectReference: {fileID: 0}
     - target: {fileID: 5704878930224470252, guid: 928289782d2672a47bde85d6ac6acb7d, type: 3}
       propertyPath: m_BackGroundColor.b

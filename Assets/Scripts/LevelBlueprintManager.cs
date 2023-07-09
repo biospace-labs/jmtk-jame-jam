@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelBlueprintManager : MonoBehaviour
 {
     public float minTimeBetweenBuildSpawns = 1f;
     public float maxTimeBetweenBuildSpawns = 5f;
     public int maxActiveBuildSites = 3;
+
+    public string nextSceneName;
 
     public GameObject buildSitePrefab;
     
@@ -41,13 +44,21 @@ public class LevelBlueprintManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minTimeBetweenBuildSpawns, maxTimeBetweenBuildSpawns));
 
             activeBuildSites.RemoveAll(buildSite => buildSite == null);
-            
+
+            var unbuilt = buildables.FindAll(buildable =>
+                !buildable.gameObject.activeInHierarchy);
+
+            if (unbuilt.Count == 0 && activeBuildSites.Count == 0)
+            {
+                yield return new WaitForSeconds(5f);
+                SceneManager.LoadScene(nextSceneName);
+            }
+
             if (activeBuildSites.Count >= maxActiveBuildSites)
                 continue;
 
-            var validBuildables = buildables.FindAll(buildable =>
-                !buildable.gameObject.activeInHierarchy
-                && !activeBuildSites.Find(buildSite => buildSite.objToBuild == buildable)
+            var validBuildables = unbuilt.FindAll(buildable =>
+                !activeBuildSites.Find(buildSite => buildSite.objToBuild == buildable)
                 && buildable.prerequisites.All(prereq => prereq.gameObject.activeInHierarchy));
 
             if (validBuildables.Count == 0)
