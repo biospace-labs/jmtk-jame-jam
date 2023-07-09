@@ -12,10 +12,11 @@ public class LevelBlueprintManager : MonoBehaviour
     public GameObject buildSitePrefab;
     
     private List<BuildableBlueprint> buildables;
-    private List<BuildSite> buildSites;
+    private List<BuildSite> activeBuildSites;
     void Start()
     {
         buildables = new List<BuildableBlueprint>(transform.GetComponentsInChildren<BuildableBlueprint>());
+        activeBuildSites = new List<BuildSite>();
 
         for (int i = 0; i < buildables.Count;)
         {
@@ -38,17 +39,28 @@ public class LevelBlueprintManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minTimeBetweenBuildSpawns, maxTimeBetweenBuildSpawns));
+            
+            if (activeBuildSites.Count > maxActiveBuildSites)
+                continue;
 
             var validBuildables = buildables.FindAll(buildable =>
-                buildable.prerequisites.All(prereq => prereq.gameObject.activeInHierarchy));
+                !buildable.gameObject.activeInHierarchy
+                && !activeBuildSites.Find(buildSite => buildSite.objToBuild == buildable)
+                && buildable.prerequisites.All(prereq => prereq.gameObject.activeInHierarchy));
+
+            if (validBuildables.Count == 0)
+                continue;
 
             var objToBuild = validBuildables[Random.Range(0, validBuildables.Count)];
 
-            var buildSite = Instantiate(buildSitePrefab, objToBuild.transform.position, objToBuild.transform.rotation);
+            Debug.Log($"spawning build site for {objToBuild.gameObject} [{objToBuild.transform.position}]");
 
-            buildSite.GetComponent<BuildSite>().objToBuild = objToBuild;
+            var buildSite = Instantiate(buildSitePrefab, objToBuild.transform.position, objToBuild.transform.rotation)
+                .GetComponent<BuildSite>();
             
+            buildSite.objToBuild = objToBuild;
             
+            activeBuildSites.Add(buildSite);
         }
     }
 }
