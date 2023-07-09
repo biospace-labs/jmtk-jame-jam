@@ -51,13 +51,12 @@ public class boi : MonoBehaviour
 
         Vector2 inputVector = new Vector2(System.Math.Sign(Input.GetAxis("Horizontal")), System.Math.Sign(Input.GetAxis("Vertical")));
         _rigidbody.velocity = new Vector2(
-            Mathf.Clamp(_rigidbody.velocity.x + _horizontalAccel * inputVector.x * Time.deltaTime, 
-                -_maxMoveSpeed, _maxMoveSpeed),
+            Mathf.MoveTowards(_rigidbody.velocity.x, inputVector.x * _maxMoveSpeed, _horizontalAccel),
             _rigidbody.velocity.y
         );
 
         _animator.enabled = Input.anyKey;
-
+        
         if (Input.GetAxis("Horizontal") != 0 && _rigidbody.velocity.x != 0)
         {
             _spriteRenderer.flipX = _rigidbody.velocity.x < 0;
