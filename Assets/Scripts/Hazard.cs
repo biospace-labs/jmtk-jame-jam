@@ -26,7 +26,6 @@ public class Hazard : MonoBehaviour
                 Vector2 knockbackVector = trigger.gameObject.transform.position.x <   gameObject.transform.position.x ? Vector2.left : Vector2.right;
                 boi.GetHit(knockbackVector * _knockbackStrength / 3 + Vector2.up * _knockbackStrength,
                     _knockdownTime);
-                Debug.Log(knockbackVector);
             }
         }
     }
