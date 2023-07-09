@@ -12,8 +12,12 @@ public class TextboxManager : MonoBehaviour
     public TextAsset randomText;
     public string[] textLines;
     public int currentLine;
+
     public int endAtLine;
     public boi boi;
+
+    public float randomTime = 60;
+    private float time = 0;
 
     private bool isActive = false;
     
@@ -44,7 +48,9 @@ public class TextboxManager : MonoBehaviour
                 DisableTextBox();
             }
         } else {
-            if (Random.Range(0.0f, 1800.0f) < 1.0f) {
+            time += Time.deltaTime;
+            if (Random.Range(0.0f, (randomTime - time) * 60) < 1.0f) {
+                time = 0;
                 if (randomText != null) {
                     textLines = (randomText.text.Split('\n'));
                 }

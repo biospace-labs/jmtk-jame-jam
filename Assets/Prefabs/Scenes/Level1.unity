@@ -477,7 +477,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &60360827
 MonoBehaviour:
@@ -3078,6 +3078,10 @@ PrefabInstance:
       propertyPath: randomText
       value: 
       objectReference: {fileID: 4900000, guid: 0639aa3bfa53bdc4baf8fae297ced6ba, type: 3}
+    - target: {fileID: 954860047131433661, guid: 01479813b712ae543943cd905487145c, type: 3}
+      propertyPath: randomTime
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 1219901367735142865, guid: 01479813b712ae543943cd905487145c, type: 3}
       propertyPath: m_Pivot.x
       value: 0

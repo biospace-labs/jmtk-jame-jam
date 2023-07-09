@@ -155,6 +155,7 @@ MonoBehaviour:
   minTimeBetweenBuildSpawns: 2
   maxTimeBetweenBuildSpawns: 7
   maxActiveBuildSites: 4
+  nextSceneName: 
   buildSitePrefab: {fileID: 6452244594432848034, guid: ee01463ec5d6478469593493177b3c8e, type: 3}
 --- !u!4 &11557435
 Transform:
@@ -2331,6 +2332,10 @@ PrefabInstance:
       propertyPath: randomText
       value: 
       objectReference: {fileID: 4900000, guid: 610d21f2dce7ecc48880cd57cfdb18ba, type: 3}
+    - target: {fileID: 954860047131433661, guid: 01479813b712ae543943cd905487145c, type: 3}
+      propertyPath: randomTime
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 1219901367735142865, guid: 01479813b712ae543943cd905487145c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
