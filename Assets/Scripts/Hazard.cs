@@ -22,10 +22,12 @@ public class Hazard : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().OverlapCollider(filter, colliders);
         foreach (Collider2D trigger in colliders) {
             boi boi = trigger.gameObject.GetComponent<boi>();
-            Vector2 knockbackVector = trigger.gameObject.transform.position.x <   gameObject.transform.position.x ? Vector2.left : Vector2.right;
-            boi.GetHit(knockbackVector * _knockbackStrength / 3 + Vector2.up * _knockbackStrength,
-                _knockdownTime);
-            Debug.Log(knockbackVector);
+            if (boi != null) {
+                Vector2 knockbackVector = trigger.gameObject.transform.position.x <   gameObject.transform.position.x ? Vector2.left : Vector2.right;
+                boi.GetHit(knockbackVector * _knockbackStrength / 3 + Vector2.up * _knockbackStrength,
+                    _knockdownTime);
+                Debug.Log(knockbackVector);
+            }
         }
     }
 }
