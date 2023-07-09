@@ -3089,6 +3089,10 @@ PrefabInstance:
       propertyPath: randomTime
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 954860047131433661, guid: 01479813b712ae543943cd905487145c, type: 3}
+      propertyPath: levelEndText
+      value: 
+      objectReference: {fileID: 4900000, guid: 3e29c09783fa94832a97d310da48f820, type: 3}
     - target: {fileID: 1219901367735142865, guid: 01479813b712ae543943cd905487145c, type: 3}
       propertyPath: m_Pivot.x
       value: 0

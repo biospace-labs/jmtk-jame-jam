@@ -166,6 +166,9 @@ MonoBehaviour:
   maxTimeBetweenBuildSpawns: 7
   maxActiveBuildSites: 4
   nextSceneName: 
+  onLevelEnd:
+    m_PersistentCalls:
+      m_Calls: []
   buildSitePrefab: {fileID: 6452244594432848034, guid: ee01463ec5d6478469593493177b3c8e, type: 3}
 --- !u!4 &11557435
 Transform:
@@ -3839,6 +3842,10 @@ PrefabInstance:
       propertyPath: randomTime
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 954860047131433661, guid: 01479813b712ae543943cd905487145c, type: 3}
+      propertyPath: levelEndText
+      value: 
+      objectReference: {fileID: 4900000, guid: 56ea62168ed3941bf9070f494106c2c0, type: 3}
     - target: {fileID: 1219901367735142865, guid: 01479813b712ae543943cd905487145c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4924,7 +4931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5704878930224470252, guid: 928289782d2672a47bde85d6ac6acb7d, type: 3}
       propertyPath: orthographic size
-      value: 5.3472223
+      value: 10.694445
       objectReference: {fileID: 0}
     - target: {fileID: 5704878930224470252, guid: 928289782d2672a47bde85d6ac6acb7d, type: 3}
       propertyPath: m_BackGroundColor.b
