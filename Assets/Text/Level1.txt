@@ -1,4 +1,3 @@
-(The Boss is calling! I'd better listen up.)
 Oi! You there! New guy!
 Er, 'Sticky', was it?
 (It's Stockholm, actually, but--)
@@ -15,7 +14,7 @@ E/Left-Click to pick up building materials,
 and Space to interact with material dispensers
 and blueprints.
 Got all that?
-(Umm--)
+(Um--)
 Good! Wa ha ha!
 You better get started quickly, 
 or it'll look bad on your 

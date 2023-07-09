@@ -37,6 +37,12 @@ public class boi : MonoBehaviour
     private bool _throwing;
     private float _throwHeldTime;
     private float _lowerBound;
+    private int randomHurtSound;
+    public AudioSource _playerAudioSource;
+    public AudioClip pickUpSound;
+    public AudioClip dropSound;
+    public AudioClip hurtSound1;
+    public AudioClip hurtSound2;
 
     // Start is called before the first frame update
     void Start()
@@ -214,6 +220,8 @@ public class boi : MonoBehaviour
             new Vector2(_rigidbody.velocity.x * _throwStrength, 0) + 
             new Vector2 (_spriteRenderer.flipX ? -1 : 1, 2) * _lobStrength;
         _heldObject = null;
+
+        _playerAudioSource.PlayOneShot(dropSound);
     }
 
     private void DropObject()
@@ -221,6 +229,8 @@ public class boi : MonoBehaviour
         _handsJoint.enabled = false;
         _heldObject.GetComponent<Collider2D>().enabled = true;
         _heldObject = null;
+
+        _playerAudioSource.PlayOneShot(dropSound);
     }
 
     private void PickUpNearest()
@@ -233,6 +243,8 @@ public class boi : MonoBehaviour
         _heldObject.GetComponent<Collider2D>().enabled = false;
         _handsJoint.connectedBody = closest;
         _handsJoint.enabled = true;
+
+        _playerAudioSource.PlayOneShot(pickUpSound);
     }
     public void GetHit(Vector2 knockback, float downTime = 1)
     {
@@ -251,6 +263,15 @@ public class boi : MonoBehaviour
         {
             particleSystem.Play();
         }
+        randomHurtSound = UnityEngine.Random.Range(0, 2);
+
+        if (randomHurtSound == 0)
+        {
+            _playerAudioSource.PlayOneShot(hurtSound1);
+        } else {
+            _playerAudioSource.PlayOneShot(hurtSound2);
+        }
+
         StartCoroutine(StartKnockDownTime(downTime));
     }
 
