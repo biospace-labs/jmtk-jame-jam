@@ -32,9 +32,8 @@ public class boi : MonoBehaviour
     private TouchingGround _isGrounded = TouchingGround.No;
     private KnockedDown _isProne = KnockedDown.No;
     private Useable _using;
-    private float _throwStart;
-    private float _throwEnd;
-    private bool _throwTimerStarted = false;
+    private bool _throwing;
+    private float _throwHeldTime;
 
     // Start is called before the first frame update
     void Start()
@@ -85,28 +84,31 @@ public class boi : MonoBehaviour
 
         if (Input.GetButtonDown("Grab"))
         {
-            if (_heldObject) {
-                _throwTimerStarted = true;
-                _throwStart = Time.timeSinceLevelLoad;
-            } else
+            if (_heldObject)
             {
+                _throwing = true;
+                _throwHeldTime = 0f;
+            }
+            else
+            {
+                _throwing = false;
                 PickUpNearest();
             }
         }
-
+        else if (_throwing && Input.GetButton("Grab"))
+        {
+            _throwHeldTime += Time.deltaTime;
+            if (_throwHeldTime >= _minimumHoldTime)
+            {
+                DropObject();
+            }
+        }
+        
         if (Input.GetButtonUp("Grab"))
         {
-            if (_throwTimerStarted) {
-                _throwEnd = Time.timeSinceLevelLoad;
-
-                if (_throwEnd - _throwStart < _minimumHoldTime)
-                {
-                    ThrowObject();
-                } else {
-                    DropObject();
-                }
-
-                _throwTimerStarted = false;
+            if (_throwing && _heldObject != null)
+            {
+                ThrowObject();
             }
         }
 

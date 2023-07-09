@@ -7,15 +7,15 @@ using UnityEngine;
 
 public class Dispenser : Useable
 {
-    public SpriteRenderer itemDisplay;
+    public SpriteRenderer[] itemDisplays;
     public GameObject toDispense;
     public Image indicator;
     public float timeToDispense = 1;
     // Start is called before the first frame update
     void Start()
     {
-
-        itemDisplay.sprite = toDispense.GetComponent<SpriteRenderer>().sprite;
+        foreach (var itemDisplay in itemDisplays)
+            itemDisplay.sprite = toDispense.GetComponent<SpriteRenderer>().sprite;
         indicator.fillAmount = 0f;
     }
 
