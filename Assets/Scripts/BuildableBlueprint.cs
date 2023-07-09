@@ -39,7 +39,6 @@ public class BuildableBlueprint : MonoBehaviour
     {
         tiles = gameObject.transform.GetChild(0).gameObject;
         spriteHeight = tiles.GetComponentInChildren<Renderer>().bounds.size.y;
-
         xPosInitial = tiles.transform.position.x;
         yPosInitial = tiles.transform.position.y;
 

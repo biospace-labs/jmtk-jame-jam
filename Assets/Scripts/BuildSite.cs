@@ -41,7 +41,7 @@ public class BuildSite : Useable
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"BuildPoint TriggerEnter {other.gameObject}");
+        //Debug.Log($"BuildPoint TriggerEnter {other.gameObject}");
         ResourceItem item = other.gameObject.GetComponent<ResourceItem>();
         if (item)
         {
@@ -52,7 +52,7 @@ public class BuildSite : Useable
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log($"BuildPoint TriggerExit {other.gameObject}");
+        //Debug.Log($"BuildPoint TriggerExit {other.gameObject}");
         ResourceItem item = other.gameObject.GetComponent<ResourceItem>();
         if (item)
         {
