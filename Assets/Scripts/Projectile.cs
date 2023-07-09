@@ -49,6 +49,6 @@ public class Projectile : MonoBehaviour
         yield return null;
         gameObject.GetComponent<CircleCollider2D>().enabled = false;
         yield return new WaitForSeconds(1);
-        Destroy(gameObject);
+        Destroy(gameObject.transform.parent.gameObject);
     }
 }

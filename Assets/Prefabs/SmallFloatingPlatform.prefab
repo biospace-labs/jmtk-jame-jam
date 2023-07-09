@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 7605000458463122069}
   - component: {fileID: 501930027146119457}
   - component: {fileID: 2580505030238560087}
+  - component: {fileID: 7613070026747609381}
   m_Layer: 7
   m_Name: kenney_industrial_tiles_packed_5
   m_TagString: Untagged
@@ -248,6 +249,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 1}
   m_EdgeRadius: 0
+--- !u!251 &7613070026747609381
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4152461051105991165}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &5733355392374495508
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +361,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9206620737564260191}
   - component: {fileID: 2309933954447457633}
-  - component: {fileID: -5894995682290440740}
   m_Layer: 7
   m_Name: SmallFloatingPlatform
   m_TagString: Untagged
@@ -390,25 +409,6 @@ MonoBehaviour:
         m_Calls: []
   startBuilt: 0
   prerequisites: []
---- !u!251 &-5894995682290440740
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7600832977765297397}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 0
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!1 &8073139256119418319
 GameObject:
   m_ObjectHideFlags: 0
