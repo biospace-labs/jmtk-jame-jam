@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3882354883235711307}
   - component: {fileID: 1605311709321047151}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: kenney_industrial_tiles_packed_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7605000458463122069}
   - component: {fileID: 501930027146119457}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: kenney_industrial_tiles_packed_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 8134768185548312919}
   - component: {fileID: 2309933954447457633}
   - component: {fileID: -5894995682290440740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmallFloatingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8088386015400909725}
   - component: {fileID: 3092775300813693448}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: kenney_industrial_tiles_packed_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
