@@ -19,8 +19,10 @@ public class BuildableBlueprint : MonoBehaviour
     private float spriteHeight;
     private GameObject tiles;
     private ParticleSystem _buildParticles;
+    private float xPosInitial;
     private float yPosInitial;
     public float moveSpeed;
+    public float trembleIntensity;
 
     [SerializeField]
     private BlueprintStaticProperties blueprintStaticProperties;
@@ -38,6 +40,7 @@ public class BuildableBlueprint : MonoBehaviour
         tiles = gameObject.transform.GetChild(0).gameObject;
         spriteHeight = tiles.GetComponentInChildren<Renderer>().bounds.size.y;
 
+        xPosInitial = tiles.transform.position.x;
         yPosInitial = tiles.transform.position.y;
 
         tiles.transform.position = new Vector2(tiles.transform.position.x,
@@ -57,9 +60,11 @@ public class BuildableBlueprint : MonoBehaviour
         while (tiles.transform.position.y < yPosInitial)
         {
             tiles.transform.position += Vector3.up * moveSpeed * Time.deltaTime;
+            tiles.transform.position += UnityEngine.Random.insideUnitSphere * trembleIntensity * Time.deltaTime;
             yield return null;
         }
 
+        tiles.transform.position = new Vector2(xPosInitial, yPosInitial);
         onBuildComplete.Invoke();
     }
 }
