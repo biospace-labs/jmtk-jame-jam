@@ -1111,6 +1111,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1152600264788907123, guid: 9b37d0430fd4a84498a29c4e1de984ce, type: 3}
+      propertyPath: respawnLocation.x
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1152600264788907123, guid: 9b37d0430fd4a84498a29c4e1de984ce, type: 3}
+      propertyPath: respawnLocation.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2466885504217803087, guid: 9b37d0430fd4a84498a29c4e1de984ce, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1492,6 +1500,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 11557435}
     m_Modifications:
+    - target: {fileID: 1648135238727804155, guid: c52d356a08c66df4fb968da9e83df5ba, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 26.215801
+      objectReference: {fileID: 0}
     - target: {fileID: 1630230744522113365, guid: 4414540d609e77f43b12f4a743743765, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -1547,10 +1559,6 @@ PrefabInstance:
     - target: {fileID: 9103841099715114353, guid: 4414540d609e77f43b12f4a743743765, type: 3}
       propertyPath: blueprintStaticProperties.requiredResources.Array.size
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1648135238727804155, guid: c52d356a08c66df4fb968da9e83df5ba, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 26.215801
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2354,6 +2362,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 11557435}
     m_Modifications:
+    - target: {fileID: 1648135238727804155, guid: c52d356a08c66df4fb968da9e83df5ba, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 26.215801
+      objectReference: {fileID: 0}
     - target: {fileID: 1630230744522113365, guid: 4414540d609e77f43b12f4a743743765, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -2405,10 +2417,6 @@ PrefabInstance:
     - target: {fileID: 9103841099715114353, guid: 4414540d609e77f43b12f4a743743765, type: 3}
       propertyPath: startBuilt
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1648135238727804155, guid: c52d356a08c66df4fb968da9e83df5ba, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 26.215801
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3202,6 +3210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 11557435}
     m_Modifications:
+    - target: {fileID: 1648135238727804155, guid: c52d356a08c66df4fb968da9e83df5ba, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 26.215801
+      objectReference: {fileID: 0}
     - target: {fileID: 1630230744522113365, guid: 4414540d609e77f43b12f4a743743765, type: 3}
       propertyPath: 
       value: 
@@ -3273,10 +3285,6 @@ PrefabInstance:
     - target: {fileID: 9103841099715114353, guid: 4414540d609e77f43b12f4a743743765, type: 3}
       propertyPath: startBuilt
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1648135238727804155, guid: c52d356a08c66df4fb968da9e83df5ba, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 26.215801
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
