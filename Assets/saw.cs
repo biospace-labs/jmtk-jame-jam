@@ -28,7 +28,7 @@ public class saw : MonoBehaviour
         _trackRenderer = transform.GetChild(0).transform.GetChild(1).GetComponent<SpriteRenderer>();
         _sawRenderer = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         _trackRenderer.size = new Vector2(1.0f / 3, trackLength);
-        _trackRenderer.gameObject.transform.position = _sawRenderer.transform.position + transform.up * trackLength / 2.0f;
+        _trackRenderer.gameObject.transform.position = transform.position + transform.up * (trackLength / 2.0f + 1);
         StartCoroutine(Traverse(transform.position + transform.up,
             transform.position + transform.up * (trackLength + 1)));
     }
