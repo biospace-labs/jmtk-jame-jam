@@ -15,7 +15,7 @@ TagManager:
   - Item
   - Ground
   - ItemInteractable
-  - 
+  - Hazard
   - 
   - 
   - 
@@ -50,4 +50,7 @@ TagManager:
     locked: 0
   - name: Hands
     uniqueID: 4247160845
+    locked: 0
+  - name: Particles
+    uniqueID: 987989589
     locked: 0
