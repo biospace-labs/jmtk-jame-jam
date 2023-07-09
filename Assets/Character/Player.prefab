@@ -15000,7 +15000,7 @@ MonoBehaviour:
   _coyoteTime: 0.1
   _dynamicFriction: 1.2
   _throwStrength: 1
-  _lobStrength: 10
+  _lobStrength: 12
   _immuneTime: 2
   _minimumHoldTime: 0.2
   _heldObject: {fileID: 0}

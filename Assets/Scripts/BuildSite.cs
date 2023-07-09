@@ -20,11 +20,11 @@ public class BuildSite : Useable
     public void Start()
     {
         availableResources = new List<ResourceItem>();
-        UpdateIndicators();
 
         buildIndicator.fillAmount = 0;
     }
 
+    private bool updatedIndicators = false;
     public void Update()
     {
         if (!objToBuild)
@@ -36,6 +36,12 @@ public class BuildSite : Useable
         {
             Debug.LogWarning("BuildSite: objToBuild already active, destroying self!");
             Destroy(gameObject);
+        }
+        
+        if (!updatedIndicators)
+        {
+            UpdateIndicators();
+            updatedIndicators = true;
         }
     }
 
