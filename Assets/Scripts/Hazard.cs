@@ -18,10 +18,10 @@ public class Hazard : MonoBehaviour
         List<Collider2D> colliders = new List<Collider2D>();
         var filter = new ContactFilter2D();
         filter.useTriggers = true;
-        filter.SetLayerMask(LayerMask.GetMask("Player"));
+        filter.SetLayerMask(LayerMask.GetMask("PlayerHurtbox"));
         gameObject.GetComponent<Rigidbody2D>().OverlapCollider(filter, colliders);
         foreach (Collider2D trigger in colliders) {
-            boi boi = trigger.gameObject.GetComponent<boi>();
+            boi boi = trigger.gameObject.transform.parent.gameObject.GetComponent<boi>();
             if (boi != null) {
                 Vector2 knockbackVector = trigger.gameObject.transform.position.x <   gameObject.transform.position.x ? Vector2.left : Vector2.right;
                 boi.GetHit(knockbackVector * _knockbackStrength / 3 + Vector2.up * _knockbackStrength,
