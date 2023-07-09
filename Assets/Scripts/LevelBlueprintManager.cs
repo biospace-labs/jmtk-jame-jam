@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class LevelBlueprintManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class LevelBlueprintManager : MonoBehaviour
     public int maxActiveBuildSites = 3;
 
     public string nextSceneName;
+
+    public UnityEvent onLevelEnd;
 
     public GameObject buildSitePrefab;
     
@@ -33,8 +36,16 @@ public class LevelBlueprintManager : MonoBehaviour
             
             i++;
         }
+    }
 
+    public void StartLevel()
+    {
         StartCoroutine(SpawnBuildables());
+    }
+
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(nextSceneName);
     }
 
     private IEnumerator SpawnBuildables()
@@ -50,8 +61,8 @@ public class LevelBlueprintManager : MonoBehaviour
 
             if (unbuilt.Count == 0 && activeBuildSites.Count == 0)
             {
-                yield return new WaitForSeconds(5f);
-                SceneManager.LoadScene(nextSceneName);
+                yield return new WaitForSeconds(1f);
+                onLevelEnd.Invoke();
             }
 
             if (activeBuildSites.Count >= maxActiveBuildSites)
