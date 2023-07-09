@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 
 public class boi : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class boi : MonoBehaviour
     public float _dynamicFriction = 1.2f; // horizontal velocity is divided by this amount each frame without movement input
     public float _throwStrength = 1; // scales velocity-based throw velocity
     public float _lobStrength = 10; // scales base throw velocity
+    public float _immuneTime = 2;
     public float _minimumHoldTime = 0.2f;
 
     public GameObject _heldObject;
@@ -23,8 +26,10 @@ public class boi : MonoBehaviour
     private FixedJoint2D _handsJoint;
     private Animator _animator;
     private enum TouchingGround { No = 0, Yes, Coyote };
+    private enum KnockedDown { No = 0, Yes, Immune };
     private List<Collider2D> _colliding = new List<Collider2D>();
     private TouchingGround _isGrounded = TouchingGround.No;
+    private KnockedDown _isProne = KnockedDown.No;
     private Useable _using;
     private float _throwStart;
     private float _throwEnd;
@@ -43,7 +48,27 @@ public class boi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0 && _isGrounded != TouchingGround.No)
+        if (_isProne != KnockedDown.Yes)
+        {
+            handleInput();
+        }
+
+        _animator.enabled = Input.GetButton("Horizontal") && _isProne != KnockedDown.Yes;
+
+        _handsRenderer.enabled = _heldObject != null;
+
+        if (_colliding.Any((collider) => collider.gameObject.layer == LayerMask.NameToLayer("Ground")))
+            _isGrounded = TouchingGround.Yes;
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            GetHit(new Vector2(3, 25));
+        }
+    }
+
+    private void handleInput()
+    {
+        if (Input.GetAxis("Vertical") > 0 && _isGrounded != TouchingGround.No)
         {
             _rigidbody.velocity = Vector2.up * _jumpForce;
             _isGrounded = TouchingGround.No;
@@ -51,24 +76,10 @@ public class boi : MonoBehaviour
 
         Vector2 inputVector = new Vector2(System.Math.Sign(Input.GetAxis("Horizontal")), System.Math.Sign(Input.GetAxis("Vertical")));
         _rigidbody.velocity = new Vector2(
-            Mathf.Clamp(_rigidbody.velocity.x + _horizontalAccel * inputVector.x * Time.deltaTime, 
-                -_maxMoveSpeed, _maxMoveSpeed),
+            Mathf.MoveTowards(_rigidbody.velocity.x, inputVector.x * _maxMoveSpeed, _horizontalAccel),
             _rigidbody.velocity.y
         );
-
-        _animator.enabled = Input.anyKey;
-
-        if (Input.GetAxis("Horizontal") != 0 && _rigidbody.velocity.x != 0)
-        {
-            _spriteRenderer.flipX = _rigidbody.velocity.x < 0;
-            _handsRenderer.flipX = _rigidbody.velocity.x < 0;
-        }
-        else 
-        {
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x / _dynamicFriction, _rigidbody.velocity.y);
-        }
-
-        _handsRenderer.enabled = _heldObject != null;
+    
 
         if (Input.GetButtonDown("Grab"))
         {
@@ -113,19 +124,24 @@ public class boi : MonoBehaviour
             _using.EndUse();
             _using = null;
         }
-        
+
+        if (Input.GetAxis("Horizontal") != 0 && _rigidbody.velocity.x != 0)
+        {
+            _spriteRenderer.flipX = _rigidbody.velocity.x < 0;
+            _handsRenderer.flipX = _rigidbody.velocity.x < 0;
+        }
+        else
+        {
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x / _dynamicFriction, _rigidbody.velocity.y);
+        }
+
         // Debug coyote time
         //_spriteRenderer.color = _isGrounded == TouchingGround.Yes ? Color.white :
         //  (_isGrounded == TouchingGround.Coyote ? Color.blue : Color.red);
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _colliding.Add(collision.collider);
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground") )
-        {
-            _isGrounded = TouchingGround.Yes;
-        }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -146,6 +162,28 @@ public class boi : MonoBehaviour
         {
             _isGrounded = TouchingGround.No;
         }
+    }
+
+    private IEnumerator StartKnockDownTime(float knockDownTime)
+    {
+        _isProne = KnockedDown.Yes;
+        _animator.enabled = false;
+        gameObject.GetComponent<SpriteResolver>().SetCategoryAndLabel("Normal", "Prone");
+        yield return new WaitForSeconds(knockDownTime);
+        StartCoroutine(StartImmuneTime());
+    }
+    private IEnumerator StartImmuneTime()
+    {
+        _isProne = KnockedDown.Immune;
+        float elapsedTime = 0f;
+        while (elapsedTime < _immuneTime)
+        {
+            elapsedTime += Time.deltaTime;
+            _spriteRenderer.color = Math.Round(elapsedTime * 10) % 2 == 0 ? Color.white : Color.clear;
+            yield return null;
+        }
+        _spriteRenderer.color = Color.white;
+        _isProne = KnockedDown.No;
     }
 
     private void ThrowObject()
@@ -175,6 +213,25 @@ public class boi : MonoBehaviour
         _heldObject.GetComponent<Collider2D>().enabled = false;
         _handsJoint.connectedBody = closest;
         _handsJoint.enabled = true;
+    }
+    public void GetHit(Vector2 knockback, float downTime = 1)
+    {
+        if (_isProne != KnockedDown.No) return; // Can't get hit if down already or immune
+        if (_heldObject)
+        {
+            ThrowObject();
+        }
+        if (_using)
+        {
+            _using.EndUse();
+            _using = null;
+        }
+        _rigidbody.velocity = knockback;
+        foreach(ParticleSystem particleSystem in gameObject.transform.GetChild(2).transform.GetComponentsInChildren<ParticleSystem>())
+        {
+            particleSystem.Play();
+        }
+        StartCoroutine(StartKnockDownTime(downTime));
     }
 
     private T getClosestOverlapping<T>(string layerName = null)
