@@ -42,6 +42,8 @@ public class BuildSite : Useable
         {
             UpdateIndicators();
             updatedIndicators = true;
+            
+            objToBuild.ShowBlueprint();
         }
     }
 
