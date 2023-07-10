@@ -63,6 +63,7 @@ public class LevelBlueprintManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(1f);
                 onLevelEnd.Invoke();
+                yield break;
             }
 
             if (activeBuildSites.Count >= maxActiveBuildSites)
