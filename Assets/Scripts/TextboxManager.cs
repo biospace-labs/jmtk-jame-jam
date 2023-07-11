@@ -13,10 +13,7 @@ public class TextboxManager : MonoBehaviour
     public TextAsset introText;
     public TextAsset levelEndText;
     public TextAsset randomText;
-    public string[] textLines;
-    public int currentLine;
 
-    public int endAtLine;
     public boi boi;
 
     public float randomMinTime = 20;
@@ -28,33 +25,19 @@ public class TextboxManager : MonoBehaviour
     private bool isActive = false;
     private LevelBlueprintManager levelManager;
 
-    enum Dialogue
-    {
-        Intro,
-        LevelEnd,
-    }
-
-    private Dialogue currentDialogue;
-
     // Start is called before the first frame update
     void Start()
     {
         levelManager = FindObjectOfType<LevelBlueprintManager>();
-        levelManager.onLevelEnd.AddListener(LevelEnd);
+        levelManager.onLevelEnd.AddListener(OnLevelEnd);
         
         boi = FindObjectOfType<boi>();
 
         randomTime = Random.Range(randomMinTime,randomMaxTime);
+
         if (introText != null) {
-            textLines = (introText.text.Split('\n'));
-
-            if (endAtLine == 0) {
-                endAtLine = textLines.Length - 1;
-            }
-
-            currentLine = 0;
-            currentDialogue = Dialogue.Intro;
-            EnableTextBox();
+            var lines = introText.text.Split('\n');
+            PlayLines(lines, () => levelManager.StartLevel());  
         }
         else
         {
@@ -62,15 +45,11 @@ public class TextboxManager : MonoBehaviour
         }
     }
 
-    void LevelEnd()
+    private void OnLevelEnd()
     {
         if (levelEndText != null) {
-            textLines = (levelEndText.text.Split('\n'));
-            endAtLine = textLines.Length - 1;
-            
-            currentLine = 0;
-            currentDialogue = Dialogue.LevelEnd;
-            EnableTextBox();
+            var lines = levelEndText.text.Split('\n');
+            PlayLines(lines, () => levelManager.LoadNextScene());  
         }
         else
         {
@@ -81,45 +60,43 @@ public class TextboxManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isActive) {
-            text.text = textLines[currentLine];
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                currentLine += 1;
-            }
-            if (currentLine > endAtLine)
-            {
-                DisableTextBox();
-                if (currentDialogue == Dialogue.Intro)
-                {
-                    levelManager.StartLevel();
-                }
-                else if (currentDialogue == Dialogue.LevelEnd)
-                {
-                    levelManager.LoadNextScene();
-                }
-            }
-        } else {
+        if (!isActive && randomText != null)
+        {
             time += Time.deltaTime;
             if (time >= randomTime) {
                 time -= randomTime;
                 randomTime = Random.Range(randomMinTime, randomMaxTime);
-                if (randomText != null) {
-                    textLines = (randomText.text.Split('\n'));
-                }
-                endAtLine = textLines.Length - 1;
-                currentLine = 0;
-                EnableTextBox();
+
+                var lines = randomText.text.Split('\n');
+                PlayLines(lines);
             }
         }
     }
 
-    public void EnableTextBox() {
+    public void PlayLines(IEnumerable<string> lines, Action then = null)
+    {
+        StartCoroutine(PlayLinesCoroutine(lines, then));
+    }
+
+    private IEnumerator PlayLinesCoroutine(IEnumerable<string> lines, Action then)
+    {
+        EnableTextBox();
+        foreach (string line in lines)
+        {
+            text.text = line;
+            yield return new WaitUntil(() => Input.GetButtonDown("Grab") || Input.GetButtonDown("Use"));
+        }
+        DisableTextBox();
+        then();
+    }
+
+    private void EnableTextBox() {
         textBox.SetActive(true);
         boi._inputsEnabled = false;
         isActive = true;
     }
 
-    public void DisableTextBox() {
+    private void DisableTextBox() {
         textBox.SetActive(false);
         boi._inputsEnabled = true;
         isActive = false;
