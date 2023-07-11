@@ -5003,7 +5003,7 @@ GameObject:
   - component: {fileID: 338984470363731089}
   - component: {fileID: 8929008379284241485}
   m_Layer: 3
-  m_Name: Audio Source
+  m_Name: Player Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5037,7 +5037,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 0.33
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
