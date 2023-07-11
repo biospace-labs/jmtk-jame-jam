@@ -84,6 +84,7 @@ public class TextboxManager : MonoBehaviour
         foreach (string line in lines)
         {
             text.text = line;
+            yield return null;
             yield return new WaitUntil(() => Input.GetButtonDown("Grab") || Input.GetButtonDown("Use"));
         }
         DisableTextBox();
