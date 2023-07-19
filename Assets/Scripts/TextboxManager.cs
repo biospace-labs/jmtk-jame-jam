@@ -87,7 +87,7 @@ public class TextboxManager : MonoBehaviour
             yield return new WaitUntil(() => Input.GetButtonDown("Grab") || Input.GetButtonDown("Use"));
         }
         DisableTextBox();
-        then();
+        then?.Invoke();
     }
 
     private void EnableTextBox() {
