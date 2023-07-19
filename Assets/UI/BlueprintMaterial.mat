@@ -41,6 +41,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _FlashMagnitude: 0.25
+    - _FlashRate: 0.67
     - _HighlightsFuzziness: 0.4
     - _HighlightsThreshold: 0.2
     m_Colors:
