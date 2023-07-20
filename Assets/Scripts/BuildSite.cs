@@ -79,12 +79,12 @@ public class BuildSite : Useable
 
     public override void BeginUse()
     {
-        StartCoroutine("HoldToBuild");
+        StartCoroutine(nameof(HoldToBuild));
     }
 
     public override void EndUse()
     {
-        StopCoroutine("HoldToBuild");
+        StopCoroutine(nameof(HoldToBuild));
         buildIndicator.fillAmount = 0f;
     }
 

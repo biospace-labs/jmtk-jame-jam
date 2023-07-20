@@ -25,12 +25,12 @@ public class Dispenser : Useable
 
     public override void BeginUse()
     { 
-        StartCoroutine("HoldToDispense");
+        StartCoroutine(nameof(HoldToDispense));
     }
 
     public override void EndUse()
     {
-        StopCoroutine("HoldToDispense");
+        StopCoroutine(nameof(HoldToDispense));
         indicator.fillAmount = 0f;
     }
 
