@@ -34,8 +34,7 @@ public class boi : MonoBehaviour
     private TouchingGround _isGrounded = TouchingGround.No;
     private KnockedDown _isProne = KnockedDown.No;
     private Useable _using;
-    private bool _throwing;
-    private float _throwHeldTime;
+    private bool _dropping;
     private float _lowerBound;
     private int randomHurtSound;
     public AudioSource _playerAudioSource;
@@ -101,32 +100,19 @@ public class boi : MonoBehaviour
         {
             if (_heldObject)
             {
-                _throwing = true;
-                _throwHeldTime = 0f;
+                _dropping = true;
+                StartCoroutine(nameof(StartDropTimer));
             }
             else
             {
-                _throwing = false;
                 PickUpNearest();
             }
         }
-        else if (_throwing && Input.GetButton("Grab"))
-        {
-            _throwHeldTime += Time.deltaTime;
-            if (_throwHeldTime >= _minimumHoldTime)
-            {
-                DropObject();
-            }
-        }
-        
-        if (Input.GetButtonUp("Grab"))
-        {
-            if (_throwing && _heldObject != null)
-            {
-                ThrowObject();
-            }
-        }
 
+        if (_dropping && _heldObject && Input.GetButtonUp("Grab"))
+        {
+            ThrowObject();
+        }
 
         if (Input.GetButtonDown("Use"))
         {
@@ -212,8 +198,21 @@ public class boi : MonoBehaviour
         _isProne = KnockedDown.No;
     }
 
+    private IEnumerator StartDropTimer()
+    {
+        yield return new WaitForSeconds(_minimumHoldTime);
+
+        if (_heldObject)
+        {
+            DropObject();
+        }
+    }
+
     private void ThrowObject()
     {
+        StopCoroutine(nameof(StartDropTimer));
+        _dropping = false;
+
         _handsJoint.enabled = false;
         _heldObject.GetComponent<Collider2D>().enabled = true;
         _heldObject.GetComponent<Rigidbody2D>().velocity = Input.GetAxis("Vertical") < 0 ? Vector2.zero:
@@ -226,6 +225,8 @@ public class boi : MonoBehaviour
 
     private void DropObject()
     {
+        _dropping = false;
+
         _handsJoint.enabled = false;
         _heldObject.GetComponent<Collider2D>().enabled = true;
         _heldObject = null;
